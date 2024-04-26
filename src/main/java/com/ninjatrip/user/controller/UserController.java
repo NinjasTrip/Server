@@ -68,7 +68,7 @@ public class UserController {
     }
 
     /**
-     *
+     *회원수정
      */
     @PatchMapping("/updateUser")
     public ResponseEntity<?> updateUser(User user) throws SQLException {
@@ -76,8 +76,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body("회원가입 성공");
     }
 
+    /**
+     *회원삭제
+     */
     @DeleteMapping("/deleteUser")
-    public ResponseEntity<?> delteUser(User user) throws SQLException {
+    public ResponseEntity<?> deleteUser(User user) throws SQLException {
         userService.deleteUser(user.getUserIdx());
         return ResponseEntity.status(HttpStatus.OK).body("회원가입 성공");
     }
