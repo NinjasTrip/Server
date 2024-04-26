@@ -17,7 +17,7 @@ public class BoardController {
         this.boardService = boardService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<Board> getBoardList() {
         return boardService.getBoardList();
     }
@@ -27,12 +27,12 @@ public class BoardController {
         return boardService.getBoard(boardIdx);
     }
 
-    @PostMapping("/")
+    @PostMapping
     public void writeBoard(@RequestBody Board board) {
         boardService.writeBoard(board);
     }
 
-    @PatchMapping("/")
+    @PatchMapping
     public void modifyBoard(@RequestBody Board board) {
         boardService.modifyBoard(board);
     }
