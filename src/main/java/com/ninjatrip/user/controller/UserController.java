@@ -64,8 +64,7 @@ public class UserController {
      */
     @PostMapping("/{userIdx}")
     public User getUser(@PathVariable("userIdx") int userIdx) throws SQLException {
-        User user = userService.getUserByUserIdx(userIdx);
-        return user;
+        return userService.getUserByUserIdx(userIdx);
     }
 
     /**
