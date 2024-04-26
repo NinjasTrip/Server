@@ -10,7 +10,7 @@
 			JOIN User u ON b.writerIdx = u.userIdx
 		WHERE board_idx = #{boardIdx}
 	</select>
-	<select id="getBoardList" resultType="board">
+	<select id="findByAll" resultType="board">
 		SELECT *
 		FROM Board
 	</select>
