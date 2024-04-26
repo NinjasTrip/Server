@@ -13,6 +13,8 @@ public class UserController {
         this.userService = userService;
     }
 
+    static int a = 0;
+
     /**
      * 회원가입
      */
