@@ -54,6 +54,13 @@
             <version>3.0.3</version>
             <scope>test</scope>
         </dependency>
+        <!-- swagger를 위한 의존성 추가. springdoc로 검색 : SpringDoc OpenAPI Starter WebMVC UI -->
+		<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
+		<dependency>
+		    <groupId>org.springdoc</groupId>
+		    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+		    <version>2.5.0</version>
+		</dependency>
     </dependencies>
 
     <build>
