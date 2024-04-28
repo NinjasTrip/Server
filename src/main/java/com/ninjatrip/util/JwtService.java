@@ -73,8 +73,7 @@ public class JwtService {
     }
 
     public String reIssueAccessToken(Token token) {
-        String accessToken = createAccessToken(token.getUserIdx());
-        return accessToken;
+        return createAccessToken(token.getUserIdx());
     }
 
     public boolean validateAccessToken(Token token) {
