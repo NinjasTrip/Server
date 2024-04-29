@@ -28,6 +28,6 @@ public interface UserMapper {
 
     void deleteUser(int userIdx) throws SQLException;
     void updateUser(User user) throws SQLException;
-    boolean loginUser(String email, String password) throws SQLException;
+    User loginUser(String email, String password) throws SQLException;
 
 }
