@@ -15,6 +15,8 @@ import static com.ninjatrip.config.secret.Secret.JWT_SECRET_KEY;
 public class JwtService {
     public String createJwt(int userIdx, long option) {
         Date now = new Date();
+        // HS256 : HMAC SHA256 해싱 알고리즘 사용 - key : JWT_SECRET_KEY
+        // base64 로 인코딩
         return Jwts.builder()
                 .setHeaderParam("type", "jwt")
                 .claim("userIdx", userIdx)
@@ -25,7 +27,7 @@ public class JwtService {
     }
 
     public String createAccessToken(int userIdx) {
-        long tokenInValidTime = (1000 * 60 * 30);
+        long tokenInValidTime = 1000L * 60 * 60 * 12;  // 12 hour
         return this.createJwt(userIdx, tokenInValidTime);
     }
 
@@ -35,6 +37,7 @@ public class JwtService {
     }
 
     public int getUserIdx() {
+        // header에서 "X-ACCESS-TOKEN"을 통해 토큰을 가져옴
         String accessToken = getJwt();
 
         if(accessToken == null || accessToken.length() == 0){
@@ -44,6 +47,7 @@ public class JwtService {
         Token token = new Token();
         token.setAccessToken(accessToken);
 
+        // 토큰 유효성 검사
         if(validateAccessToken(token)) {
             Jws<Claims> claims;
             try{
@@ -53,7 +57,7 @@ public class JwtService {
             } catch (Exception e) {
                 return 0;
             }
-            token.setUserIdx(claims.getBody().get("userIdx",Integer.class)); // jwt 에서 userIdx를 추출합니다.
+            token.setUserIdx(claims.getBody().get("userIdx",Integer.class)); // jwt 에서 userIdx를 추출
         } else if(!validateAccessToken(token)) {
             return 0;
         }
@@ -61,7 +65,7 @@ public class JwtService {
         return token.getUserIdx();
     }
 
-    // 토큰 만료
+    // 토큰 만료 : 로그아웃 구현 시 사용할 것
     public Long getExpiration(String accessToken) {
         Date expiration = Jwts.parser()
                 .setSigningKey(JWT_SECRET_KEY)
@@ -72,6 +76,7 @@ public class JwtService {
         return (expiration.getTime() - now);
     }
 
+    // refresh token을 사용할 때 사용
     public String reIssueAccessToken(Token token) {
         return createAccessToken(token.getUserIdx());
     }
