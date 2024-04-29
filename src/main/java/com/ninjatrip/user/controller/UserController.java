@@ -2,12 +2,10 @@ package com.ninjatrip.user.controller;
 
 import com.ninjatrip.user.dto.User;
 import com.ninjatrip.user.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.security.auth.login.AccountLockedException;
 import java.sql.SQLException;
 
 @RestController
