@@ -20,9 +20,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean loginUser(String email, String password) throws SQLException {
-        return mapper.loginUser(email,password);
-
+    public int loginUser(String email, String password) throws SQLException {
+        User user = mapper.loginUser(email, password);
+        if (user == null) {
+            return 0;
+        } else {
+            return user.getUserIdx();
+        }
     }
 
     @Override

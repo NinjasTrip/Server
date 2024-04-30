@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public interface UserService {
     void createUser(User user) throws SQLException;
-    boolean loginUser(String email, String password) throws SQLException;
+    int loginUser(String email, String password) throws SQLException;
     User getUserByUserIdx(int userIdx) throws SQLException;
     void updateUser(User user) throws SQLException;
     void deleteUser(int userIdx) throws SQLException;

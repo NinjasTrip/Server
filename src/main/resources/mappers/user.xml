@@ -36,12 +36,10 @@
     </update>
 
     <!-- 이메일과 비밀번호로 사용자 정보 검증하는 쿼리 -->
-    <select id="loginUser" resultType="boolean">
-        SELECT EXISTS(
-        SELECT 1
+    <select id="loginUser" resultType="com.ninjatrip.user.dto.User">
+        SELECT *
         FROM user
         WHERE email = #{email} AND password = #{password}
-        )
     </select>
 
 </mapper>
