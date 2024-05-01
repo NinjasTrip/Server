@@ -1,7 +1,6 @@
 package com.ninjatrip.comment.controller;
 
 import com.ninjatrip.comment.dto.Comment;
-import com.ninjatrip.comment.dto.DeleteCommentReq;
 import com.ninjatrip.comment.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -59,9 +58,9 @@ public class CommentController {
     /**
      * 댓글 삭제
      */
-    public ResponseEntity<String> deleteComment(@RequestBody DeleteCommentReq deleteCommentReq) {
+    public ResponseEntity<String> deleteComment(@RequestParam int commentIdx) {
         try {
-            commentService.deleteComment(deleteCommentReq);
+            commentService.deleteComment(commentIdx);
             return ResponseEntity.status(HttpStatus.OK).body("작성 완료");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.OK).body("삭제에 오류가 발생했습니다.");

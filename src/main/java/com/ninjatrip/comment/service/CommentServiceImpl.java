@@ -1,7 +1,6 @@
 package com.ninjatrip.comment.service;
 
 import com.ninjatrip.comment.dto.Comment;
-import com.ninjatrip.comment.dto.DeleteCommentReq;
 import com.ninjatrip.comment.mapper.CommentMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,7 +29,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void deleteComment(DeleteCommentReq request) throws Exception {
-        commentMapper.deleteComment(request);
+    public void deleteComment(int commentIdx) throws Exception {
+        commentMapper.deleteComment(commentIdx);
     }
 }

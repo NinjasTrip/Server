@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 public class Comment {
     private int commentIdx;
     private int boardIdx;
+    private int writerIdx;
     private String content;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
