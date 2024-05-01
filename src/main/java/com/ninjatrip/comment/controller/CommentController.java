@@ -8,7 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,6 +19,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class CommentController {
 
     private final CommentService commentService;
+
+    /**
+     * 댓글 불러오기
+     */
+    public ResponseEntity<?> getComment(@RequestParam int boardIdx) {
+        try {
+            List<Comment> comments = commentService.getComment(boardIdx);
+            return ResponseEntity.status(HttpStatus.OK).body(comments);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.OK).body("작성에 오류가 발생했습니다.");
+        }
+    }
 
     /**
      * 댓글 작성
