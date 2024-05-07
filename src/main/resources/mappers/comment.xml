@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ninjatrip.board.mapper.CommentMapper">
+    <select id="getComment" parameterType="int" resultType="comment">
+        SELECT *
+        FROM Comment c
+        WHERE board_idx = #{boardIdx}
+    </select>
+    <insert id="writeComment" parameterType="comment">
+        INSERT INTO Comment (writer_idx, board_idx, comment_idx, content)
+        VALUES (#{boardIdx}, #{writerIdx}, #{commentIdx}, #{content})
+    </insert>
+    <update id="updateComment" parameterType="comment">
+        UPDATE Comment
+        SET content=#{content}, updated_at=default
+        WHERE comment_idx=#{commentIdx}
+    </update>
+    <delete id="deleteComment" parameterType="deleteCommentReq">
+        DELETE FROM Comment
+        WHERE comment_idx = #{commentIdx}
+    </delete>
+
+</mapper>
