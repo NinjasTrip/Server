@@ -10,8 +10,8 @@
         WHERE board_idx = #{boardIdx}
     </select>
     <insert id="writeComment" parameterType="comment">
-        INSERT INTO Comment (writer_idx, board_idx, comment_idx, content)
-        VALUES (#{boardIdx}, #{writerIdx}, #{commentIdx}, #{content})
+        INSERT INTO Comment (writer_idx, board_idx, content)
+        VALUES (#{writerIdx}, #{boardIdx}, #{content})
     </insert>
     <update id="updateComment" parameterType="comment">
         UPDATE Comment
