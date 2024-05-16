@@ -12,8 +12,8 @@
 
     <!-- 회원가입 쿼리 -->
     <insert id="createUser" parameterType="user">
-        INSERT INTO user (email, password, nickname, age, phone_number, role, created_at, updated_at)
-        VALUES (#{email}, #{password}, #{nickName}, #{age}, #{phoneNumber}, #{role}, default, default)
+        INSERT INTO user (email, password, nickname)
+        VALUES (#{email}, #{password}, #{nickName})
     </insert>
 
     <!-- 사용자 삭제 쿼리 -->
@@ -28,9 +28,6 @@
         email = #{email},
         password = #{password},
         nickname = #{nickName},
-        age = #{age},
-        phone_number = #{phoneNumber},
-        role = #{role},
         updated_at = default  <!-- 업데이트 시 시간 -->
         WHERE user_idx = #{userIdx}
     </update>

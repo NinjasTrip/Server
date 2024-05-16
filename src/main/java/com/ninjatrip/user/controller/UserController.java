@@ -33,10 +33,6 @@ public class UserController {
            if (userIdx != 0) {
                String token = jwtService.createAccessToken(userIdx);
                return ResponseEntity.status(HttpStatus.OK).body(token);
-               /**
-                * 이제 jwt가 발행됨으로써 jwt가 유효하지 않다면 예외를 발생시키는 방법을 사용해야한다.
-                * JWT SERVICE에서 토큰에서 userIdx를 가져오는 코드를 생성했으니, validation 후 예외를 발생시킨다.
-                */
            } else {
                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("잘못된 이메일 또는 비밀번호");
            }
@@ -48,7 +44,6 @@ public class UserController {
     /**
      * 회원가입
      *
-     * @param user
      */
     @PostMapping ("/signup")
     public ResponseEntity<?> signUp(User user){
