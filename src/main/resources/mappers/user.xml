@@ -5,25 +5,36 @@
 
 <mapper namespace="com.ninjatrip.user.mapper.UserMapper">
 
+    <resultMap id="UserResultMap" type="com.ninjatrip.user.dto.User">
+        <id column="user_idx" property="userIdx"/>
+        <result column="email" property="email"/>
+        <result column="password" property="password"/>
+        <result column="nickname" property="nickName"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+
     <!-- userIdx로 사용자 정보를 가져오는 쿼리 -->
-    <select id="getUserByUserIdx" resultType="com.ninjatrip.user.dto.User">
-        SELECT * FROM user WHERE user_idx = #{userIdx}
+    <select id="getUserByUserIdx" resultMap="UserResultMap">
+        SELECT *
+        FROM User
+        WHERE user_idx = #{userIdx}
     </select>
 
     <!-- 회원가입 쿼리 -->
     <insert id="createUser" parameterType="user">
-        INSERT INTO user (email, password, nickname)
+        INSERT INTO User (email, password, nickname)
         VALUES (#{email}, #{password}, #{nickName})
     </insert>
 
     <!-- 사용자 삭제 쿼리 -->
     <delete id="deleteUser">
-        DELETE FROM user WHERE user_idx = #{userIdx}
+        DELETE FROM User WHERE user_idx = #{userIdx}
     </delete>
 
     <!-- 사용자 정보 업데이트 쿼리 -->
     <update id="updateUser" parameterType="user">
-        UPDATE user
+        UPDATE User
         SET
         email = #{email},
         password = #{password},
@@ -33,9 +44,9 @@
     </update>
 
     <!-- 이메일과 비밀번호로 사용자 정보 검증하는 쿼리 -->
-    <select id="loginUser" resultType="com.ninjatrip.user.dto.User">
+    <select id="loginUser" resultMap="UserResultMap">
         SELECT *
-        FROM user
+        FROM User
         WHERE email = #{email} AND password = #{password}
     </select>
 

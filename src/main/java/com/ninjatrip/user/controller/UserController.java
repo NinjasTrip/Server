@@ -21,7 +21,6 @@ public class UserController {
         this.jwtService = jwtService;
     }
 
-
     /**
      * 로그인
      *
@@ -31,8 +30,7 @@ public class UserController {
         try {
            int userIdx = userService.loginUser(email, password);
            if (userIdx != 0) {
-               String token = jwtService.createAccessToken(userIdx);
-               return ResponseEntity.status(HttpStatus.OK).body(token);
+               return ResponseEntity.status(HttpStatus.OK).body("성공");
            } else {
                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("잘못된 이메일 또는 비밀번호");
            }
@@ -46,7 +44,7 @@ public class UserController {
      *
      */
     @PostMapping ("/signup")
-    public ResponseEntity<?> signUp(User user){
+    public ResponseEntity<?> signUp(@RequestBody User user){
         try {
             userService.createUser(user);
             return ResponseEntity.status(HttpStatus.OK).body("회원가입 성공");

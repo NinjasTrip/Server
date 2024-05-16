@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ninjatrip.board.mapper.CommentMapper">
+<mapper namespace="com.ninjatrip.comment.mapper.CommentMapper">
     <select id="getComment" parameterType="int" resultType="comment">
         SELECT *
         FROM Comment c
@@ -18,7 +18,7 @@
         SET content=#{content}, updated_at=default
         WHERE comment_idx=#{commentIdx}
     </update>
-    <delete id="deleteComment" parameterType="deleteCommentReq">
+    <delete id="deleteComment" parameterType="int">
         DELETE FROM Comment
         WHERE comment_idx = #{commentIdx}
     </delete>
