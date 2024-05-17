@@ -13,6 +13,7 @@
 	<select id="findByAll" resultType="board">
 		SELECT *
 		FROM Board
+		ORDER BY board_idx DESC
 	</select>
 	<insert id="writeBoard" parameterType="board">
 		INSERT INTO Board (writer_idx, title, content)
