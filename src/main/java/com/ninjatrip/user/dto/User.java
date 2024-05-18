@@ -14,6 +14,7 @@ public class User {
     private String email;
     private String password;
     private String nickName;
+    private String refreshToken;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

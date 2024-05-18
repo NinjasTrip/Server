@@ -10,6 +10,7 @@
         <result column="email" property="email"/>
         <result column="password" property="password"/>
         <result column="nickname" property="nickName"/>
+        <result column="refresh_token" property="refreshToken"/>
         <result column="created_at" property="createdAt"/>
         <result column="updated_at" property="updatedAt"/>
     </resultMap>
@@ -22,7 +23,7 @@
     </select>
 
     <!-- 회원가입 쿼리 -->
-    <insert id="createUser" parameterType="user">
+    <insert id="createUser" parameterType="UserResultMap">
         INSERT INTO User (email, password, nickname)
         VALUES (#{email}, #{password}, #{nickName})
     </insert>
@@ -33,7 +34,7 @@
     </delete>
 
     <!-- 사용자 정보 업데이트 쿼리 -->
-    <update id="updateUser" parameterType="user">
+    <update id="updateUser" parameterType="UserResultMap">
         UPDATE User
         SET
         email = #{email},
@@ -49,5 +50,22 @@
         FROM User
         WHERE email = #{email} AND password = #{password}
     </select>
+
+    <update id="saveRefreshToken">
+        UPDATE User
+        SET refresh_token = #{refreshToken}
+        WHERE user_idx = #{userIdx}
+    </update>
+
+    <select id="getRefreshToken" resultType="String">
+        SELECT refresh_token
+        FROM User
+        WHERE user_idx = #{userIdx}
+    </select>
+
+    <delete id="deleteRefreshToken">
+        DELETE FROM User
+        WHERE user_idx = #{userIdx}
+    </delete>
 
 </mapper>

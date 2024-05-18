@@ -5,6 +5,8 @@ import com.ninjatrip.user.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -42,5 +44,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(int userIdx) throws SQLException {
         mapper.deleteUser(userIdx);
+    }
+
+    @Override
+    public void saveRefreshToken(int userIdx, String refreshToken) throws SQLException {
+        mapper.saveRefreshToken(userIdx, refreshToken);
+    }
+
+    @Override
+    public Object getRefreshToken(int userIdx) throws SQLException {
+        return mapper.getRefreshToken(userIdx);
+    }
+
+    @Override
+    public void deleRefreshToken(int userIdx) throws SQLException {
+        mapper.deleteRefreshToken(userIdx);
     }
 }
