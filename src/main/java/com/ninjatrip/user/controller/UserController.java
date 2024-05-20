@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
     private final UserService userService;
     private final JWTUtil jwtUtil;
@@ -31,11 +31,11 @@ public class UserController {
      *
      */
     @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> loginUser(@RequestParam String email, @RequestParam String password){
+    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody User user){
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.ACCEPTED;
         try {
-            int userIdx = userService.loginUser(email, password);
+            int userIdx = userService.loginUser(user.getEmail(), user.getPassword());
             if (userIdx != 0) {
                 String accessToken = jwtUtil.createAccessToken(userIdx);
                 String refreshToken = jwtUtil.createRefreshToken(userIdx);
