@@ -27,7 +27,6 @@ public class BoardController {
         } catch (Exception e) {
             return exceptionHandler(e);
         }
-
     }
 
     @GetMapping("/{boardIdx}")
