@@ -17,7 +17,7 @@
 
     <!-- userIdx로 사용자 정보를 가져오는 쿼리 -->
     <select id="getUserByUserIdx" resultMap="UserResultMap">
-        SELECT *
+        SELECT user_idx, email, nickname
         FROM User
         WHERE user_idx = #{userIdx}
     </select>
