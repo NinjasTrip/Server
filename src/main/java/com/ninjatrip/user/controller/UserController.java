@@ -77,9 +77,25 @@ public class UserController {
      * @param userIdx
      * @return User
      */
-    @PostMapping("/{userIdx}")
-    public User getUser(@PathVariable("userIdx") int userIdx) throws SQLException {
-        return userService.getUserByUserIdx(userIdx);
+    @GetMapping("/info/{userIdx}")
+    public ResponseEntity<Map<String, Object>> getUser(@PathVariable("userIdx") int userIdx, HttpServletRequest request) {
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
+        if (jwtUtil.checkToken(request.getHeader("Authorization"))) {
+            try {
+//				로그인 사용자 정보.
+                User user = userService.getUserByUserIdx(userIdx);
+                resultMap.put("userInfo", user);
+                status = HttpStatus.OK;
+            } catch (Exception e) {
+                resultMap.put("message", e.getMessage());
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+            }
+        }
+        else {
+            status = HttpStatus.UNAUTHORIZED;
+        }
+        return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
     /**
@@ -101,7 +117,7 @@ public class UserController {
     }
 
     @Operation(summary = "로그아웃", description = "회원 정보를 담은 Token 을 제거한다.")
-    @GetMapping("/logout/{userId}")
+    @GetMapping("/logout/{userIdx}")
     @Hidden
     public ResponseEntity<?> removeToken(@PathVariable("userIdx") @Parameter(required = true) int userIdx) {
         Map<String, Object> resultMap = new HashMap<>();
