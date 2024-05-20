@@ -3,6 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ninjatrip.user.mapper.PlanMapper">
+<mapper namespace="com.ninjatrip.plan.mapper.PlanMapper">
+
+    <resultMap id="PlanResultMap" type="com.ninjatrip.plan.dto.Plan">
+        <id property="planIdx" column="plan_idx"/>
+        <result property="userIdx" column="user_idx"/>
+        <result property="placeName" column="place_name"/>
+        <result property="address" column="address"/>
+        <result property="phone" column="phone"/>
+        <result property="category" column="category"/>
+        <result property="date" column="date"/>
+        <result property="time" column="time"/>
+    </resultMap>
+
+    <!-- Plan 삽입 메서드 -->
+    <insert id="createPlan" parameterType="plan">
+        INSERT INTO Plan (user_idx, place_name, address, phone, category, date, time)
+        VALUES (#{userIdx}, #{placeName}, #{address}, #{phone}, #{category}, #{date}, #{time})
+    </insert>
+
+    <!-- Plan 조회 메서드 (예시) -->
+    <select id="getPlanById" parameterType="int" resultMap="PlanResultMap">
+        SELECT * FROM plans WHERE plan_idx = #{planIdx}
+    </select>
 
 </mapper>

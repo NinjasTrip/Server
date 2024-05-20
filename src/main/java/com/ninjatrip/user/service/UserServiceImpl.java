@@ -5,8 +5,6 @@ import com.ninjatrip.user.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
