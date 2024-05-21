@@ -1,5 +1,6 @@
 package com.ninjatrip.user.controller;
 
+import com.ninjatrip.plan.service.ImageGenerateService;
 import com.ninjatrip.user.dto.User;
 import com.ninjatrip.user.service.UserService;
 import com.ninjatrip.util.JWTUtil;
@@ -21,7 +22,7 @@ public class UserController {
     private final UserService userService;
     private final JWTUtil jwtUtil;
 
-    public UserController(UserService userService, JWTUtil jwtUtil) {
+    public UserController(UserService userService, JWTUtil jwtUtil, ImageGenerateService imageGenerateService) {
         this.userService = userService;
         this.jwtUtil = jwtUtil;
     }
@@ -32,6 +33,7 @@ public class UserController {
      */
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> loginUser(@RequestBody User user){
+
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.ACCEPTED;
         try {
