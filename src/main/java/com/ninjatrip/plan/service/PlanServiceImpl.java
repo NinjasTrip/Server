@@ -18,4 +18,9 @@ public class PlanServiceImpl implements PlanService {
         System.out.println("hello3");
         mapper.createPlan(plan);
     }
+
+    @Override
+    public Plan getPlan(int userIdx) {
+        return mapper.getPlan(userIdx);
+    }
 }

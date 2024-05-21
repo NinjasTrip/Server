@@ -24,7 +24,9 @@
 
     <!-- Plan 조회 메서드 (예시) -->
     <select id="getPlanById" parameterType="int" resultMap="PlanResultMap">
-        SELECT * FROM plans WHERE plan_idx = #{planIdx}
+        SELECT *
+        FROM plans
+        WHERE user_idx = #{userIdx}
     </select>
 
 </mapper>

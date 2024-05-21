@@ -6,4 +6,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface PlanMapper {
     void createPlan(Plan plan);
+    Plan getPlan(int userIdx);
 }
