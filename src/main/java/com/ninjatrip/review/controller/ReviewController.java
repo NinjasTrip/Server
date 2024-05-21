@@ -21,7 +21,7 @@ public class ReviewController {
     }
 
     @GetMapping("/{placeName}")
-    public ResponseEntity<Map<String, Object>> getPlan(@PathVariable String placeName) {
+    public ResponseEntity<Map<String, Object>> getReview(@PathVariable String placeName) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.OK;
         try {
