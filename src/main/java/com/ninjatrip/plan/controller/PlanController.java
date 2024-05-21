@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -40,15 +42,14 @@ public class PlanController {
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
-    @GetMapping
-    public ResponseEntity<Map<String, Object>> getPlan(HttpServletRequest request) {
+    @GetMapping("/{userIdx}")
+    public ResponseEntity<Map<String, Object>> getPlan(@PathVariable int userIdx) {
         Map<String, Object> resultMap = new HashMap<>();
-        int userIdx = jwtUtil.getUserIdx(request.getHeader("Authorization"));
         HttpStatus status = HttpStatus.OK;
         try {
-            Plan plan = planService.getPlan(userIdx);
+            List<Plan> plan = planService.getPlan(userIdx);
             status = HttpStatus.OK;
-            resultMap.put("planInfo", plan);
+            resultMap.put("planinfo", plan);
         } catch (Exception e) {
             resultMap.put("message", e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;

@@ -4,6 +4,8 @@ import com.ninjatrip.plan.dto.Plan;
 import com.ninjatrip.plan.mapper.PlanMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PlanServiceImpl implements PlanService {
 
@@ -20,7 +22,7 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public Plan getPlan(int userIdx) {
+    public List<Plan> getPlan(int userIdx) {
         return mapper.getPlan(userIdx);
     }
 }
