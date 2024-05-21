@@ -10,22 +10,27 @@
         <id property="reviewIdx" column="review_idx"/>
         <result property="writerIdx" column="writer_idx"/>
         <result property="place" column="place"/>
+        <result property="comment" column="comment"/>
         <result property="traffic" column="traffic"/>
         <result property="travel" column="travel"/>
         <result property="food" column="food"/>
         <result property="total" column="total"/>
         <result property="createdAt" column="created_at"/>
+        <result property="nickname" column="nickname"/>
+        <result property="profileImg" column="profile_img"/>
     </resultMap>
 
     <select id="getReviews" parameterType="String" resultMap="ReviewResultMap">
-        SELECT review_idx, writer_idx, place, traffic, travel, food, total, created_at
-        FROM Review
+        SELECT r.review_idx, r.writer_idx, r.place, r.comment, r.traffic, r.travel, r.food, r.total, r.created_at
+                u.nickname, u.profile_img
+        FROM Review AS r
+            JOIN User AS u ON writer_idx = user_idx
         WHERE place = #{place}
     </select>
 
     <insert id="writeReview" parameterType="review">
-        INSERT INTO Review (writer_idx, place, traffic, travel, food, total)
-        VALUES (#{writerIdx}, #{place}, #{traffic}, #{travel}, #{food}, #{total})
+        INSERT INTO Review (writer_idx, place, comment, traffic, travel, food, total)
+        VALUES (#{writerIdx}, #{place}, ${comment}, #{traffic}, #{travel}, #{food}, #{total})
     </insert>
 
 </mapper>

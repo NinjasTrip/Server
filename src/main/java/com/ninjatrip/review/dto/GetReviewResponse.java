@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Review {
+public class GetReviewResponse {
     private int reviewIdx;
     private int writerIdx;
     private String place;
@@ -19,4 +19,6 @@ public class Review {
     private int food;
     private int total;
     private LocalDateTime createdAt;
+    private String nickname;
+    private String profile_img;
 }
