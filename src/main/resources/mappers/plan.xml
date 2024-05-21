@@ -25,7 +25,7 @@
     <!-- Plan 조회 메서드 (예시) -->
     <select id="getPlanById" parameterType="int" resultMap="PlanResultMap">
         SELECT *
-        FROM plans
+        FROM Plan
         WHERE user_idx = #{userIdx}
     </select>
 
