@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ninjatrip.review.mapper.ReviewMapper">
+
+    <!-- resultMap 정의 -->
+    <resultMap id="ReviewResultMap" type="com.ninjatrip.review.dto.Review">
+        <id property="reviewIdx" column="review_idx"/>
+        <result property="writerIdx" column="writer_idx"/>
+        <result property="place" column="place"/>
+        <result property="traffic" column="traffic"/>
+        <result property="travel" column="travel"/>
+        <result property="food" column="food"/>
+        <result property="total" column="total"/>
+        <result property="createdAt" column="created_at"/>
+    </resultMap>
+
+    <select id="getReviews" parameterType="String" resultMap="ReviewResultMap">
+        SELECT review_idx, writer_idx, place, traffic, travel, food, total, created_at
+        FROM Review
+        WHERE place = #{place}
+    </select>
+
+    <insert id="writeReview" parameterType="review">
+        INSERT INTO Review (writer_idx, place, traffic, travel, food, total)
+        VALUES (#{writerIdx}, #{place}, #{traffic}, #{travel}, #{food}, #{total})
+    </insert>
+
+</mapper>
