@@ -1,5 +1,6 @@
 package com.ninjatrip.review.controller;
 
+import com.ninjatrip.review.dto.GetReviewResponse;
 import com.ninjatrip.review.dto.Review;
 import com.ninjatrip.review.service.ReviewService;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,7 @@ public class ReviewController {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.OK;
         try {
-            List<Review> reviews = reviewService.getReviews(placeName);
+            List<GetReviewResponse> reviews = reviewService.getReviews(placeName);
             status = HttpStatus.OK;
             resultMap.put("reviewList", reviews);
         } catch (Exception e) {

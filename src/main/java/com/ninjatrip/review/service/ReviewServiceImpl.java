@@ -1,5 +1,6 @@
 package com.ninjatrip.review.service;
 
+import com.ninjatrip.review.dto.GetReviewResponse;
 import com.ninjatrip.review.dto.Review;
 import com.ninjatrip.review.mapper.ReviewMapper;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<Review> getReviews(String placeName) {
+    public List<GetReviewResponse> getReviews(String placeName) {
         return mapper.getReviews(placeName);
     }
 
