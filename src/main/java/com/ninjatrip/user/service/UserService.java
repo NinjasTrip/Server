@@ -12,5 +12,5 @@ public interface UserService {
     void deleteUser(int userIdx) throws SQLException;
     void saveRefreshToken(int userIdx, String refreshToken) throws SQLException;
     Object getRefreshToken(int userIdx) throws SQLException;
-    void deleRefreshToken(int userIdx) throws SQLException;
+    void deleteRefreshToken(int userIdx) throws SQLException;
 }

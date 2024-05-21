@@ -123,7 +123,7 @@ public class UserController {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.ACCEPTED;
         try {
-            userService.deleRefreshToken(userIdx);
+            userService.deleteRefreshToken(userIdx);
             status = HttpStatus.OK;
         } catch (Exception e) {
             resultMap.put("message", e.getMessage());
