@@ -10,6 +10,7 @@
         <result column="email" property="email"/>
         <result column="password" property="password"/>
         <result column="nickname" property="nickName"/>
+        <result column="profile_img" property="profileImg"/>
         <result column="refresh_token" property="refreshToken"/>
         <result column="created_at" property="createdAt"/>
         <result column="updated_at" property="updatedAt"/>
@@ -17,7 +18,7 @@
 
     <!-- userIdx로 사용자 정보를 가져오는 쿼리 -->
     <select id="getUserByUserIdx" resultMap="UserResultMap">
-        SELECT user_idx, email, nickname
+        SELECT user_idx, email, nickname, profile_img, created_at, updated_at
         FROM User
         WHERE user_idx = #{userIdx}
     </select>
@@ -63,9 +64,10 @@
         WHERE user_idx = #{userIdx}
     </select>
 
-    <delete id="deleteRefreshToken">
-        DELETE FROM User
+    <update id="deleteRefreshToken">
+        UPDATE User
+        SET refresh_token = null
         WHERE user_idx = #{userIdx}
-    </delete>
+    </update>
 
 </mapper>

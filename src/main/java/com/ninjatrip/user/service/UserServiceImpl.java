@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleRefreshToken(int userIdx) throws SQLException {
+    public void deleteRefreshToken(int userIdx) throws SQLException {
         mapper.deleteRefreshToken(userIdx);
     }
 }
