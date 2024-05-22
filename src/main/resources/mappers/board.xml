@@ -5,6 +5,16 @@
 
 <mapper namespace="com.ninjatrip.board.mapper.BoardMapper">
 
+	<resultMap id="boardResultMap" type="com.ninjatrip.board.dto.Board">
+		<id property="boardIdx" column="board_idx" />
+		<result property="writerIdx" column="writer_idx" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="hit" column="hit" />
+		<result property="createdAt" column="created_at" />
+		<result property="updatedAt" column="updated_at" />
+	</resultMap>
+
 	<select id="findByBoardIdx" parameterType="int" resultType="board">
 		SELECT b.boardIdx, b.writerIdx, u.nickname, b.title, b.content, b.hit, b.createdAt
 		FROM Board b
@@ -12,7 +22,7 @@
 		WHERE board_idx = #{boardIdx}
 	</select>
 
-	<select id="findByAll" resultType="board">
+	<select id="findByAll" resultMap="boardResultMap">
 		SELECT *
 		FROM Board
 		ORDER BY board_idx DESC
