@@ -15,6 +15,7 @@ public class ImageGenerateServiceImpl implements ImageGenerateService {
     private String OPENAI_KEY;
 
     public String openAiImageUrl(String imageToRequest) {
+        System.out.println(imageToRequest);
         System.out.println("OpenAI Key: " + OPENAI_KEY);
         OpenAiService service = new OpenAiService(OPENAI_KEY);
         CreateImageRequest build = CreateImageRequest.builder()
@@ -30,12 +31,11 @@ public class ImageGenerateServiceImpl implements ImageGenerateService {
     }
 
     public String makePrompt(List<Plan> plan, String comment) {
-        String s = "";
+        String s = "하루기록{";
         for (Plan p : plan) {
-            s += "["+p.getTime()+"] placeCategory :" +p.getCategory() + p.getPlaceName()+" "+"\n";
+            s += " [2024.05.22."+p.getTime()+"] "+p.getPlaceName()+"방문.";
         }
-        s += "[ 코멘트 : "+comment+"] \n";
-        s += "위의 하루 기록을 포괄하는 그림을 만들어줘\n 이미지 비율은 16:9로 해줘";
+        s += comment+"}"+"\n 위의 하루 기록을 포괄하는 cartoon을 만들어줘. 이미지 비율은 16:9로 해줘";
         return s;
     }
 }

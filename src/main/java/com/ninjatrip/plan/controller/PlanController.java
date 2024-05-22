@@ -61,12 +61,14 @@ public class PlanController {
     }
 
     @PostMapping("/create/diary")
-    public String postImage(@RequestBody Diary diary) {
-        List<Plan> plan = planService.getDatePlan(diary.getUserIdx(), diary.getDate());
-        String str = imageGenerateService.makePrompt(plan, diary.getComment());
-        diary.setImageUrl(imageGenerateService.openAiImageUrl(str));
+    public String postImage(@RequestParam int userIdx, @RequestParam String date,@RequestParam String comment) {
+
+        List<Plan> plan = planService.getDatePlan(userIdx, date);
+        String s = imageGenerateService.makePrompt(plan,comment);
+        String imageUrl = imageGenerateService.openAiImageUrl(s);
+        Diary diary = new Diary(date,userIdx,imageUrl,comment);
         diaryService.createDiary(diary);
-        return diary.getImageUrl();
+        return imageUrl;
     }
 
     @GetMapping("/get/diary")
