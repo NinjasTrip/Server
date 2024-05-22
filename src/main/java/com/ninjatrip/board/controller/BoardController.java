@@ -3,11 +3,14 @@ package com.ninjatrip.board.controller;
 import com.ninjatrip.board.dto.Board;
 import com.ninjatrip.board.dto.BoardResponseDto;
 import com.ninjatrip.board.service.BoardService;
+import com.ninjatrip.plan.dto.Plan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/board")
@@ -20,13 +23,18 @@ public class BoardController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getBoardList() {
+    public ResponseEntity<Map<String, Object>> getBoardList() {
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.OK;
         try {
             List<Board> boards =  boardService.getBoardList();
-            return ResponseEntity.status(HttpStatus.OK).body(boards);
+            status = HttpStatus.OK;
+            resultMap.put("articles", boards);
         } catch (Exception e) {
-            return exceptionHandler(e);
+            resultMap.put("message", e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
+        return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
     @GetMapping("/{boardIdx}")
