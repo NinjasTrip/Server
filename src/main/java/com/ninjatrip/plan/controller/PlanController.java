@@ -6,15 +6,10 @@ import com.ninjatrip.plan.service.DiaryService;
 import com.ninjatrip.plan.service.ImageGenerateService;
 import com.ninjatrip.plan.service.PlanService;
 import com.ninjatrip.util.JWTUtil;
-import io.swagger.v3.oas.annotations.Hidden;
-import io.swagger.v3.oas.annotations.Parameter;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +23,7 @@ public class PlanController {
     private final ImageGenerateService imageGenerateService;
     private final DiaryService diaryService;
 
-    public PlanController(PlanService planService,ImageGenerateService imageGenerateService,DiaryService diaryService,JWTUtil jwtUtil) {
+    public PlanController(PlanService planService, JWTUtil jwtUtil, ImageGenerateService imageGenerateService, DiaryService diaryService) {
         this.planService = planService;
         this.jwtUtil = new JWTUtil();
         this.imageGenerateService = imageGenerateService;
@@ -66,14 +61,12 @@ public class PlanController {
     }
 
     @PostMapping("/create/diary")
-    public String postImage(@RequestParam int userIdx, @RequestParam String date,@RequestParam String comment) {
-
-        List<Plan> plan = planService.getDatePlan(userIdx, date);
-        String s = imageGenerateService.makePrompt(plan,comment);
-        String imageUrl = imageGenerateService.openAiImageUrl(s);
-        Diary diary = new Diary(date,userIdx,imageUrl,comment);
+    public String postImage(@RequestBody Diary diary) {
+        List<Plan> plan = planService.getDatePlan(diary.getUserIdx(), diary.getDate());
+        String str = imageGenerateService.makePrompt(plan, diary.getComment());
+        diary.setImageUrl(imageGenerateService.openAiImageUrl(str));
         diaryService.createDiary(diary);
-        return imageUrl;
+        return diary.getImageUrl();
     }
 
     @GetMapping("/get/diary")

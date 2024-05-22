@@ -20,5 +20,5 @@ public class GetReviewResponse {
     private int total;
     private LocalDateTime createdAt;
     private String nickname;
-    private String profile_img;
+    private String profileImg;
 }

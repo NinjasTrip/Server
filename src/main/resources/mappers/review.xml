@@ -6,7 +6,7 @@
 <mapper namespace="com.ninjatrip.review.mapper.ReviewMapper">
 
     <!-- resultMap 정의 -->
-    <resultMap id="ReviewResultMap" type="com.ninjatrip.review.dto.Review">
+    <resultMap id="ReviewResultMap" type="com.ninjatrip.review.dto.GetReviewResponse">
         <id property="reviewIdx" column="review_idx"/>
         <result property="writerIdx" column="writer_idx"/>
         <result property="place" column="place"/>
@@ -21,8 +21,8 @@
     </resultMap>
 
     <select id="getReviews" parameterType="String" resultMap="ReviewResultMap">
-        SELECT r.review_idx, r.writer_idx, r.place, r.comment, r.traffic, r.travel, r.food, r.total, r.created_at
-                u.nickname, u.profile_img
+        SELECT review_idx, writer_idx, place, comment, traffic, travel, food, total, r.created_at,
+               nickname, profile_img
         FROM Review AS r
             JOIN User AS u ON writer_idx = user_idx
         WHERE place = #{place}
