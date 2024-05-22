@@ -7,5 +7,5 @@ import java.util.List;
 public interface PlanService {
     void createPlan(Plan plan);
     List<Plan> getPlan(int userIdx);
-    List<Plan> getDatePlan(int usetIdx,String date);
+    List<Plan> getDatePlan(int userIdx, String date);
 }

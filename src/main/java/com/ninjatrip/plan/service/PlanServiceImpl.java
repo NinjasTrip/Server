@@ -27,7 +27,7 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public List<Plan> getDatePlan(int usetIdx, String date) {
-        return mapper.getDatePlan(usetIdx, date);
+    public List<Plan> getDatePlan(int userIdx, String date) {
+        return mapper.getDatePlan(userIdx, date);
     }
 }
