@@ -29,4 +29,10 @@
         WHERE user_idx = #{userIdx}
     </select>
 
+    <select id="getDatePlan" parameterType="map" resultMap="PlanResultMap">
+        SELECT *
+        FROM Plan
+        WHERE user_idx = #{userIdx} AND date = #{date}
+    </select>
+
 </mapper>

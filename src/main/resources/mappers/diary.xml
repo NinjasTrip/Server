@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ninjatrip.plan.mapper.DiaryMapper">
+
+    <resultMap id="DiaryResultMap" type="com.ninjatrip.plan.dto.Diary">
+        <id property="diaryIdx" column="diary_idx"/>
+        <result property="date" column="date"/>
+        <result property="userIdx" column="user_idx"/>
+        <result property="imageUrl" column="image_url"/>
+        <result property="comment" column="comment"/>
+    </resultMap>
+
+    <insert id="createDiary" parameterType="com.ninjatrip.plan.dto.Diary">
+        INSERT INTO Diary (date, user_idx, image_url, comment)
+        VALUES (#{date}, #{userIdx}, #{imageUrl}, #{comment})
+    </insert>
+
+    <select id="getDiaryByUserAndDate" parameterType="map" resultMap="DiaryResultMap">
+        SELECT *
+        FROM Diary
+        WHERE user_idx = #{userIdx} AND date = #{date}
+    </select>
+
+</mapper>

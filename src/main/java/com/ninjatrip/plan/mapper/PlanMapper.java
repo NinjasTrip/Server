@@ -9,4 +9,5 @@ import java.util.List;
 public interface PlanMapper {
     void createPlan(Plan plan);
     List<Plan> getPlan(int userIdx);
+    List<Plan> getDatePlan(int userIdx,String date);
 }
