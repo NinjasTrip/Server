@@ -69,7 +69,7 @@ public class PlanController {
     public String postImage(@RequestParam int userIdx, @RequestParam String date,@RequestParam String comment) {
 
         List<Plan> plan = planService.getDatePlan(userIdx, date);
-        String s = imageGenerateService.makePrompt(plan);
+        String s = imageGenerateService.makePrompt(plan,comment);
         String imageUrl = imageGenerateService.openAiImageUrl(s);
         Diary diary = new Diary(date,userIdx,imageUrl,comment);
         diaryService.createDiary(diary);

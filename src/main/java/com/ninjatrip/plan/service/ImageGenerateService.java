@@ -29,12 +29,13 @@ public class ImageGenerateService {
                 .getUrl();
     }
 
-    public String makePrompt(List<Plan> plan) {
+    public String makePrompt(List<Plan> plan, String comment) {
         String s = "";
         for (Plan p : plan) {
             s += "["+p.getTime()+"] placeCategory :" +p.getCategory() + p.getPlaceName()+" "+"\n";
         }
-        s += "\n 위의 하루 기록을 포괄하는 그림을 만들어줘\n 이미지 비율은 16:9로 해줘";
+        s += "[ 코멘트 : "+comment+"] \n";
+        s += "위의 하루 기록을 포괄하는 그림을 만들어줘\n 이미지 비율은 16:9로 해줘";
         return s;
     }
 }
