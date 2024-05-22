@@ -4,27 +4,32 @@
 	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ninjatrip.board.mapper.BoardMapper">
+
 	<select id="findByBoardIdx" parameterType="int" resultType="board">
 		SELECT b.boardIdx, b.writerIdx, u.nickname, b.title, b.content, b.hit, b.createdAt
 		FROM Board b
 			JOIN User u ON b.writerIdx = u.userIdx
 		WHERE board_idx = #{boardIdx}
 	</select>
+
 	<select id="findByAll" resultType="board">
 		SELECT *
 		FROM Board
 		ORDER BY board_idx DESC
 	</select>
+
 	<insert id="writeBoard" parameterType="board">
 		INSERT INTO Board (writer_idx, title, content)
 				VALUES (#{writerIdx}, #{title}, #{content})
 	</insert>
+
 	<update id="updateBoard" parameterType="board">
 		UPDATE Board
 		SET title=#{title}, content=#{content},
 			updated_at=default
 		WHERE board_idx=#{boardIdx}
 	</update>
+
 	<delete id="deleteBoard" parameterType="int">
 		DELETE FROM Board WHERE board_idx=#{boardIdx}
 	</delete>

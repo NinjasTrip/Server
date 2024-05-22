@@ -62,6 +62,7 @@ public class PlanController {
 
     @PostMapping("/create/diary")
     public String postImage(@RequestBody Diary diary) {
+        System.out.println(diary.getDate());
         List<Plan> plan = planService.getDatePlan(diary.getUserIdx(), diary.getDate());
         String str = imageGenerateService.makePrompt(plan, diary.getComment());
         diary.setImageUrl(imageGenerateService.openAiImageUrl(str));
