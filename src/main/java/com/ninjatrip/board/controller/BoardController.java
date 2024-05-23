@@ -38,13 +38,18 @@ public class BoardController {
     }
 
     @GetMapping("/{boardIdx}")
-    public ResponseEntity<?> getBoard(@PathVariable("boardIdx") int boardIdx) {
+    public ResponseEntity<Map<String, Object>> getBoard(@PathVariable("boardIdx") int boardIdx) {
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.OK;
         try {
             BoardResponseDto board = boardService.getBoard(boardIdx);
-            return ResponseEntity.status(HttpStatus.OK).body(board);
+            status = HttpStatus.OK;
+            resultMap.put("article", board);
         } catch (Exception e) {
-            return exceptionHandler(e);
+            resultMap.put("message", e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
+        return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
     @PostMapping
@@ -57,7 +62,7 @@ public class BoardController {
         }
     }
 
-    @PatchMapping
+    @PatchMapping("/modify/{boardIdx}")
     public ResponseEntity<?> modifyBoard(@RequestBody Board board) {
         try {
             boardService.modifyBoard(board);

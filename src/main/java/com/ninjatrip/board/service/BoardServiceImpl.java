@@ -18,6 +18,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public BoardResponseDto getBoard(int boardIdx) {
+        boardMapper.incrementHit(boardIdx);
         return boardMapper.findByBoardIdx(boardIdx);
     }
 

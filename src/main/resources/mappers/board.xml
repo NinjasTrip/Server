@@ -11,14 +11,27 @@
 		<result property="title" column="title" />
 		<result property="content" column="content" />
 		<result property="hit" column="hit" />
+		<result property="img" column="img" />
 		<result property="createdAt" column="created_at" />
 		<result property="updatedAt" column="updated_at" />
 	</resultMap>
 
-	<select id="findByBoardIdx" parameterType="int" resultType="board">
-		SELECT b.boardIdx, b.writerIdx, u.nickname, b.title, b.content, b.hit, b.createdAt
+	<resultMap id="boardDetail" type="com.ninjatrip.board.dto.BoardResponseDto">
+		<id property="boardIdx" column="board_idx" />
+		<result property="writerIdx" column="writer_idx" />
+		<result property="nickname" column="nickname" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="hit" column="hit" />
+		<result property="img" column="img" />
+		<result property="createdAt" column="created_at" />
+		<result property="updatedAt" column="updated_at" />
+	</resultMap>
+
+	<select id="findByBoardIdx" parameterType="int" resultMap="boardDetail">
+		SELECT b.board_idx, b.writer_idx, u.nickname, b.title, b.content, b.hit, b.img, b.created_at
 		FROM Board b
-			JOIN User u ON b.writerIdx = u.userIdx
+			JOIN User u ON b.writer_idx = u.user_idx
 		WHERE board_idx = #{boardIdx}
 	</select>
 
@@ -43,5 +56,11 @@
 	<delete id="deleteBoard" parameterType="int">
 		DELETE FROM Board WHERE board_idx=#{boardIdx}
 	</delete>
+
+	<update id="incrementHit" parameterType="int">
+		UPDATE Board
+		SET hit = hit + 1
+		WHERE board_idx = #{boardIdx}
+	</update>
 
 </mapper>

@@ -16,6 +16,7 @@ public class BoardResponseDto {
     private String title;
     private String content;
     private int hit;
+    private String img;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }
